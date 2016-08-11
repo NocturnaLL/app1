@@ -1,0 +1,14 @@
+<h1>Create a new place</h1>
+<% if @place.errors.any? %>
+	<h3><%= @place.errors.full_messages.join(", ") %></h3>
+<% end %>
+
+<form action = "<%= places_path %>" method="post">
+<input type="text" name="name"><br>
+<textarea name="address" rows="8" cols="40"></textarea>
+<input type="text" name="phone_number">
+<input type="text" name="contact_mail">
+<input type="text" name="city">
+<input type="text" name="established_at">
+<button type="submit" name="button">Send</button>
+</form>

@@ -1,12 +1,11 @@
 <html>
-<b>Listing Places</b><br>
-
+<b>Listing Places</b><br><br>
 <% @places.each do |place| %>
-<b>Id:</b><%= "#{place.id}" %><br>
-<b>Name:</b><a href="<%= show_place_path(place) %>"><%= "#{place.name}" %></a><br>
+
+<b>Name:</b><a href="<%= place_path(place) %>"><%= place.name %></a><br>
 <b>Address:</b><%= "#{place.address}"%><br>
-<b>Phone Number:</b><%= "#{place.phone_number}"%><br>
-<b>Contact Mail:</b><%= "#{place.contact_mail}"%><br>
-<b>City:</b><%= "#{place.city}"%><br>
-<b>Description:</b><%= "#{place.description}"%><br>
+<b>Phone Number:</b><%= place.phone_number%><br>
+<b>Contact Mail:</b><%= place.contact_mail%><br>
+<b>City:</b><%= place.city%><br>
+<b>Description:</b><%= place.description%><br><br>
 <% end %>
