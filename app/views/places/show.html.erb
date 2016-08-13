@@ -7,6 +7,11 @@
 <b>Contact Mail:</b><%= "#{@place.contact_mail}"%><br>
 <b>City:</b><%= "#{@place.city}"%><br>
 <b>Description:</b><%= "#{@place.description}"%><br>
+<b>Category: </b><%= "#{@place.category.name}" %>
+<%= link_to "Back to place list", places_path %>
+<br/>
+<%= link_to "Edit place", edit_place_path(@place) %>
 
+
+<%= link_to "Sil", place_path(@place), method: :delete %>
 <br/><br/>
-<a href="<%= places_path %>">Back to main list</a>

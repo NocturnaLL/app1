@@ -6,6 +6,8 @@ class Place < ApplicationRecord
 	validates :contact_mail, presence:true
 	validates :city, presence:true
 	
-
+	def category
+		Category.find(category_id)
+  	end
 
 end
