@@ -1,5 +1,8 @@
 class PlacesController < ApplicationController
+	before_action :authenticate_owner!, except: [:show, :index]
 	before_action :set_place, only: [:show, :update, :edit, :destroy]
+	before_action :authorize_owner!, only: [:edit, :update, :destroy]
+	
 	def new
 		@place = Place.new
 		load_categories
@@ -10,14 +13,15 @@ class PlacesController < ApplicationController
 	end
 
 	def show
-		#@place = Place.find(params[:id])
+		
 	end
 
 	def create
 		@place = Place.new(place_params)
+		@place = current_owner.places.new(place_params)
 		
 		if @place.save
-			flash[:success] = 'Islem basariyla tamamlandi'
+			flash[:success] = 'Success'
 			redirect_to place_path(@place)
 		else
 			load_categories
@@ -26,12 +30,10 @@ class PlacesController < ApplicationController
 	end
 
 	def edit
-    	#@place = Place.find(params[:id])
     	load_categories
   	end
 
   	def update
-  		#@place = Place.find(params[:id])
   		if @place.update(place_params)
   			redirect_to place_path(@place)
   		else
@@ -41,12 +43,15 @@ class PlacesController < ApplicationController
   	end
 
   	def destroy
-		#@place = Place.find(params[:id])
 		@place.destroy
 		redirect_to places_path
 	end
 
 	private
+
+	def authorize_owner!
+		redirect_to root_path, notice: "Not authorized" unless @place.owner_id == current_owner.id	
+	end
 	
 	def place_params
 		params.require(:place).permit(:name, :address, :established_at, :phone_number, :contact_mail, :city, :category_id)
@@ -59,4 +64,5 @@ class PlacesController < ApplicationController
   	def load_categories
   		@categories = Category.all.collect {|c| [c.name, c.id ] }
   	end
+
 end

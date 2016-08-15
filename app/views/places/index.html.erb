@@ -3,10 +3,13 @@
 <% @places.each do |place| %>
 
 <b>Name:</b>
-<%= link_to place.name, place_path(place) %> 
+<%= link_to place.name, place_path(place) %> <br>
 <b>Address:</b><%= "#{place.address}"%><br>
 <b>Phone Number:</b><%= place.phone_number%><br>
 <b>Contact Mail:</b><%= place.contact_mail%><br>
 <b>City:</b><%= place.city%><br>
 <b>Description:</b><%= place.description%><br><br>
 <% end %>
+
+<%= link_to "Create a new place", new_place_path %> &nbsp;&nbsp;
+<%= link_to "Categories", categories_path %> <br>

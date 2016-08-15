@@ -7,11 +7,28 @@
 <b>Contact Mail:</b><%= "#{@place.contact_mail}"%><br>
 <b>City:</b><%= "#{@place.city}"%><br>
 <b>Description:</b><%= "#{@place.description}"%><br>
-<b>Category: </b><%= "#{@place.category.name}" %>
+<b>Category: </b><%= "#{@place.category.name}" %><br>
+<br/><br/>
 <%= link_to "Back to place list", places_path %>
+
 <br/>
-<%= link_to "Edit place", edit_place_path(@place) %>
-
-
+<% if current_owner.present? and current_owner.id == @place.owner_id %>
+<%= link_to "Edit place", edit_place_path(@place) %><br>
 <%= link_to "Sil", place_path(@place), method: :delete %>
 <br/><br/>
+<% end %>
+
+<h2>Listing Comments</h2>
+
+<% @place.comments.each do |c| %>
+  <%= c.body %><br />
+<% end %>
+<br/><br/>
+<h3>Leave a comment</h3>
+<%= form_for [@place, @place.comments.new] do |f| %>
+<%= f.text_area :body, placeholder: "Enter a comment", rows: 10 %><br>	
+<%= f.submit 'Gonder' %>
+<% end %>
+
+
+

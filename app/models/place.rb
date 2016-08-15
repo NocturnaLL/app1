@@ -6,8 +6,7 @@ class Place < ApplicationRecord
 	validates :contact_mail, presence:true
 	validates :city, presence:true
 	
-	def category
-		Category.find(category_id)
-  	end
-
+	belongs_to :category
+	has_many :comments
+	belongs_to :owner
 end
