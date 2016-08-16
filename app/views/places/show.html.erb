@@ -21,14 +21,16 @@
 <h2>Listing Comments</h2>
 
 <% @place.comments.each do |c| %>
+  <small><%= comment.user.email %> says:</small> 
   <%= c.body %><br />
 <% end %>
 <br/><br/>
+<% if current_user.present? %>
 <h3>Leave a comment</h3>
 <%= form_for [@place, @place.comments.new] do |f| %>
 <%= f.text_area :body, placeholder: "Enter a comment", rows: 10 %><br>	
 <%= f.submit 'Gonder' %>
 <% end %>
-
+<% end %>
 
 

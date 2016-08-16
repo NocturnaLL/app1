@@ -8,17 +8,21 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+
+
   <body>
   	<%= render "flash" %>
     <%= yield %>
     <hr>
+      
     <% if current_owner.present? %>
       <%= link_to 'Logout', destroy_owner_session_path , method: :delete %><br>
+
     <%else %>
       <%= link_to 'Login', owner_session_path %><br>
       <%= link_to 'Sign in', new_owner_registration_path %><br>
       <%end %>
-
+    
     
 
   </body>
