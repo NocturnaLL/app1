@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-	before_action :set_idea
+	
   before_action :set_comment, only: [:destroy]
   before_action :authorize_owner!, only: [:destroy]
 
@@ -31,7 +31,7 @@ private
     @comment = Comment.find(params[:id])
   end
 
-  def authorize_user!
+  def authorize_owner!
     redirect_to @place, notice: "Not authorized" unless @comment.owner_id == current_owner.id
   end
 
