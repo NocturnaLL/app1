@@ -8,6 +8,7 @@
 <b>City:</b><%= "#{@place.city}"%><br>
 <b>Description:</b><%= "#{@place.description}"%><br>
 <b>Category: </b><%= "#{@place.category.name}" %><br>
+<b>Owner: </b><%= @place.owner.email %> | <%= @place.owner.id %><br />
 <br/><br/>
 <%= link_to "Back to place list", places_path %>
 
@@ -23,9 +24,15 @@
 <% @place.comments.each do |c| %>
   <small><%= comment.user.email %> says:</small> 
   <%= c.body %><br />
+  <p>
+        
+     <% if current_owner.present? && c.owner_id == current_owner.id %>
+     <small><%= link_to "Delete", place_comment_path(@place, comment), method: :delete %></small>
+     <% end %>
+     </p>
 <% end %>
 <br/><br/>
-<% if current_user.present? %>
+<% if current_owner.present? %>
 <h3>Leave a comment</h3>
 <%= form_for [@place, @place.comments.new] do |f| %>
 <%= f.text_area :body, placeholder: "Enter a comment", rows: 10 %><br>	

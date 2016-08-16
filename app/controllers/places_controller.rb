@@ -44,7 +44,7 @@ class PlacesController < ApplicationController
 
   	def destroy
 		@place.destroy
-		redirect_to places_path
+		redirect_to places_path, notice: "Idea was deleted"
 	end
 
 	private

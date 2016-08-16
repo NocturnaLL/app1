@@ -6,7 +6,12 @@ class Place < ApplicationRecord
 	validates :contact_mail, presence:true
 	validates :city, presence:true
 	
+	
 	belongs_to :category
-	has_many :comments
+	has_many :comments, dependent: :destroy
 	belongs_to :owner
+	
+	private
+
+    
 end
